@@ -20,7 +20,7 @@ How the game works.
     6. A player Can drop at the beginning of the game is they are confident in the hand.
 '''
 
-from gameFunctions import dealHands
+from gameFunctions import dealHands, playerTurn
 
 deck = ['AC', 'AD', 'AH', 'AS',
         '2C', '2D', '2H', '2S',
@@ -36,14 +36,21 @@ deck = ['AC', 'AD', 'AH', 'AS',
         'QC', 'QD', 'QH', 'QS',
         'KC', 'KD', 'KH', 'KS']
 
-numOfPlayers = 0
-discard_pile = ''
-playerOneHand = ''
-playerTwoHand = ''
+gameOver = False
+round = 1
+discard_pile = []
 
 '''
 game order
 '''
 # First we deal hands
-dealHands(deck)
+hands = dealHands(deck)
+playerOneHand = hands[0]
+playerTwoHand = hands[1]
 
+'''
+ Second go through turn 1 which is different because the player 
+ doesnt have a choice of picking up from discard deck
+'''
+
+playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand)
