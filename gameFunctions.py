@@ -43,27 +43,33 @@ def dealHands(deck):
 
 
 # this will be the code for each round.
-def playerTurn(gameOver, round, deck, player1Hand, player2Hand):
-    turn = 'player1'
+def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
     #while not gameOver:
     cardsLeft = 41
     if (round % 2 != 0) and gameOver == False:
-        print('Player 1 its your turn.')
-        print(f'Your cards are {player1Hand}')
+        player = "Player 1"
+        hand = player1Hand
+    else: 
+        player = "Player 2"
+        hand = player2Hand
+        #print('Player 1 its your turn.')
+        #print(f'Your cards are {player1Hand}')
         if round == 1:
             print('Since its the first round you must draw from the deck to start the game.')
-            # selects the Number card
-            randomCardPosition = randint(0, cardsLeft)
+    # selects the Number card
+    randomCardPosition = randint(0, cardsLeft)
 
-            #sets it to the card in the deck
-            randomCard = deck[randomCardPosition]
-            player1Hand.append(randomCard)
-            deck.remove(randomCard)
-            cardsLeft -= 1
-            print(f'You now have these 6 cards {player1Hand}')
-            cardToDiscard = input('Enter the card that you want to discard: ')
-            print(cardToDiscard)
-    else:
-        print('its player twos turn')
+    #sets it to the card in the deck
+    randomCard = deck[randomCardPosition]
+    hand.append(randomCard)
+    deck.remove(randomCard)
+    cardsLeft -= 1
+    print(f'You now have these 6 cards {hand}')
+    cardToDiscard = input('Enter the card that you want to discard: ')
+    hand.remove(cardToDiscard)
+    print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
+    discard_pile.insert(0, cardToDiscard)
+    print(discard_pile)
+    round += 1
 
     return

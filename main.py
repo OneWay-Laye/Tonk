@@ -53,4 +53,4 @@ playerTwoHand = hands[1]
  doesnt have a choice of picking up from discard deck
 '''
 
-playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand)
+playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
