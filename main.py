@@ -52,5 +52,5 @@ dealHands(deck, playerOneHand, playerTwoHand)
  Second go through turn 1 which is different because the player 
  doesnt have a choice of picking up from discard deck
 '''
-
-round = playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
+while not gameOver: 
+    round = playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
