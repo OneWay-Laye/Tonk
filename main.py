@@ -52,5 +52,9 @@ dealHands(deck, playerOneHand, playerTwoHand)
  Second go through turn 1 which is different because the player 
  doesnt have a choice of picking up from discard deck
 '''
+cardsLeft = 42
 while not gameOver: 
-    round = playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
+    roundstats = playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile, cardsLeft)
+    round = roundstats[0]
+    cardsLeft = roundstats[1]
+    gameOver = roundstats[2]
