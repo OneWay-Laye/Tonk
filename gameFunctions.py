@@ -23,6 +23,22 @@ def dealHands(deck, player1Hand, player2Hand):
         else:
             cardsLeft = randomCardFunc(deck, player2Hand, cardsLeft)
 
+def pickUpDiscard(player, hand, discard_pile):
+    topCard = discard_pile[0]
+    hand.append(topCard)
+    discard_pile.remove(topCard)
+    print(f'You now have these 6 cards {hand}')
+    cardToDiscard = input('Enter the card that you want to discard: ')
+    hand.remove(cardToDiscard)
+    print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
+    discard_pile.insert(0, cardToDiscard)
+    return 
+
+def drop():
+    return
+
+def pair():
+    return
 
 # this will be the code for each round.
 def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
@@ -39,20 +55,34 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
     print(f'{player} your cards are {hand}')
     if round == 1:
         print('Since its the first round you must draw from the deck to start the game.')
-    # selects the Number card
-    randomCardPosition = randint(0, cardsLeft)
+        # selects the Number card
+        randomCardPosition = randint(0, cardsLeft)
 
-    #sets it to the card in the deck
-    randomCard = deck[randomCardPosition]
-    hand.append(randomCard)
-    deck.remove(randomCard)
-    cardsLeft -= 1
-    print(f'You now have these 6 cards {hand}')
-    cardToDiscard = input('Enter the card that you want to discard: ')
-    hand.remove(cardToDiscard)
-    print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
-    discard_pile.insert(0, cardToDiscard)
-    print(discard_pile)
+        #sets it to the card in the deck
+        randomCard = deck[randomCardPosition]
+        hand.append(randomCard)
+        deck.remove(randomCard)
+        cardsLeft -= 1
+        print(f'You now have these 6 cards {hand}')
+        cardToDiscard = input('Enter the card that you want to discard: ')
+        hand.remove(cardToDiscard)
+        print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
+        discard_pile.insert(0, cardToDiscard)
+        print(discard_pile[0])
+    else:
+        #give player decision to drop, pull from pile, or pull from the deck
+        print(f'{player} its your turn, and here is your hand {hand}')
+        print(f"The Top card in the Discard Pile is {discard_pile[0]}")
+        print("Enter Deck to pick a card from the Deck")
+        print("Enter Pile to pick a card from the Discard Pile")
+        print("Enter Drop to drop your cards to see if you win.")
+        playerMove = input('Enter Your Choice Here: ')
+        playerMoveUpper = playerMove.upper()
+        
+        if playerMoveUpper == 'PILE':
+            pickUpDiscard(player, hand, discard_pile)
+
+
     round += 1
 
     return round
