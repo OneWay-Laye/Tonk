@@ -1,49 +1,32 @@
 #Imports for the game
 from random import randint
 
+def randomCardFunc(deck, hand, cardsLeft):
+    randomCardPosition = randint(0, cardsLeft)
+    randomCard = deck[randomCardPosition]
+    hand.append(randomCard)
+    deck.remove(randomCard)
+    cardsLeft -= 1
+
+    return cardsLeft
+
 # deal hands function to start game.
-def dealHands(deck): 
+def dealHands(deck, player1Hand, player2Hand): 
     #with this deck i need to randomize the cards in which the players get.
     # start with the players hands
     cardsLeft = 51
-    player1Hand = []
-    player2Hand = []
-
-    while len(player1Hand) < 5:
+    for card in range(10):
 
         # selects the Number card
-        randomCardPosition = randint(0, cardsLeft)
-
-        #sets it to the card in the deck
-        randomCard = deck[randomCardPosition]
-        if randomCard not in deck:
-            randomCardPosition = randint(0,51)
+        if card < 5:
+            cardsLeft = randomCardFunc(deck, player1Hand, cardsLeft)
         else:
-            player1Hand.append(randomCard)
-            deck.remove(randomCard)
-            cardsLeft -= 1
-    
-    # Now we deal player twos hand
-    while len(player2Hand) < 5:
-
-        # selects the Number card
-        randomCardPosition = randint(0, cardsLeft)
-
-        #sets it to the card in the deck
-        randomCard = deck[randomCardPosition]
-        if randomCard not in deck:
-            randomCardPosition = randint(0,51)
-        else:
-            player2Hand.append(randomCard)
-            deck.remove(randomCard)
-            cardsLeft -= 1
-    
-    return player1Hand, player2Hand
-
+            cardsLeft = randomCardFunc(deck, player2Hand, cardsLeft)
 
 
 # this will be the code for each round.
 def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
+
     #while not gameOver:
     cardsLeft = 41
     if (round % 2 != 0) and gameOver == False:
@@ -52,10 +35,10 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
     else: 
         player = "Player 2"
         hand = player2Hand
-        #print('Player 1 its your turn.')
-        #print(f'Your cards are {player1Hand}')
-        if round == 1:
-            print('Since its the first round you must draw from the deck to start the game.')
+       
+    print(f'{player} your cards are {hand}')
+    if round == 1:
+        print('Since its the first round you must draw from the deck to start the game.')
     # selects the Number card
     randomCardPosition = randint(0, cardsLeft)
 
@@ -72,4 +55,4 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile):
     print(discard_pile)
     round += 1
 
-    return
+    return round

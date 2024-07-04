@@ -38,19 +38,19 @@ deck = ['AC', 'AD', 'AH', 'AS',
 
 gameOver = False
 round = 1
+playerOneHand = []
+playerTwoHand = []
 discard_pile = []
 
 '''
 game order
 '''
 # First we deal hands
-hands = dealHands(deck)
-playerOneHand = hands[0]
-playerTwoHand = hands[1]
+dealHands(deck, playerOneHand, playerTwoHand)
 
 '''
  Second go through turn 1 which is different because the player 
  doesnt have a choice of picking up from discard deck
 '''
 
-playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
+round = playerTurn(gameOver, round, deck, playerOneHand, playerTwoHand, discard_pile)
