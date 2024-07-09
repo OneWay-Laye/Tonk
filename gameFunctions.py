@@ -30,6 +30,18 @@ def pickUpDiscard(player, hand, discard_pile):
     hand.append(topCard)
     discard_pile.remove(topCard)
     print(f'You now have these 6 cards {hand}')
+    checkPair = input('Do you have a pair? enter yes or no: ').upper()
+    if checkPair == 'YES':
+        pairData = pair(hand)
+        pairMatchBool = pairData[0]
+        pairCards = pairData[1]
+        if pairMatchBool == True:
+            print('You have a pair. lets remove those cards')
+            for card in pairCards:
+                hand.remove(card)
+            print(f'Your new hand is {hand}')
+        else:
+            print('Those cards were not a match. Continue with your turn.')
     cardToDiscard = input('Enter the card that you want to discard: ')
     hand.remove(cardToDiscard)
     print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
@@ -40,6 +52,18 @@ def pickUpDiscard(player, hand, discard_pile):
 def pickFromDeck(deck, player, hand, cardsLeft, discard_pile):
     cardsLeft = randomCardFunc(deck, hand, cardsLeft)
     print(f'{player} You now have these 6 cards {hand}')
+    checkPair = input('Do you have a pair? enter yes or no: ').upper()
+    if checkPair == 'YES':
+        pairData = pair(hand)
+        pairMatchBool = pairData[0]
+        pairCards = pairData[1]
+        if pairMatchBool == True:
+            print('You have a pair. lets remove those cards')
+            for card in pairCards:
+                hand.remove(card)
+            print(f'Your new hand is {hand}')
+        else:
+            print('Those cards were not a match. Continue with your turn.')
     cardToDiscard = input('Enter the card that you want to discard: ')
     hand.remove(cardToDiscard)
     print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
@@ -159,6 +183,18 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile, ca
         deck.remove(randomCard)
         cardsLeft -= 1
         print(f'{player} You now have these 6 cards {hand}')
+        checkPair = input('Do you have a pair? enter yes or no: ').upper()
+        if checkPair == 'YES':
+            pairData = pair(hand)
+            pairMatchBool = pairData[0]
+            pairCards = pairData[1]
+            if pairMatchBool == True:
+                print('You have a pair. lets remove those cards')
+                for card in pairCards:
+                    hand.remove(card)
+                print(f'Your new hand is {hand}')
+            else:
+                print('Those cards were not a match. Continue with your turn.')
         cardToDiscard = input('Enter the card that you want to discard: ')
         hand.remove(cardToDiscard)
         print(f'This is {player}\'s hand = {hand} after discarding {cardToDiscard}')
@@ -181,19 +217,6 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile, ca
             countTotal(player1Hand, player2Hand)
         elif playerMoveUpper == 'DROP':
             gameOver = drop(player1Hand, player2Hand)
-        elif playerMoveUpper == 'PAIR':
-            pairData = pair(hand)
-            pairMatchBool = pairData[0]
-            pairCards = pairData[1]
-            if pairMatchBool == True:
-                print('You have a pair. lets remove those cards')
-                for card in pairCards:
-                    hand.remove(card)
-                print(f'Your new hand is {hand}')
-            else:
-                print('Those cards were not a match. Continue with your turn.')
-
-
 
     round += 1
 
