@@ -86,8 +86,55 @@ def drop(player1Hand, player2Hand):
     return gameOver
 
 #Check to see if cards are a pair
-def pair():
-    return
+def pair(hand):
+    playerPair = []
+    print('So you think you have a pair?')
+    pairInput = input('Enter your 3 cards pair with a space in between: ')
+    cardsToCheck = pairInput.split(' ')
+    print(cardsToCheck)
+    #loop through list
+    suitList = []
+    numberList = []
+    faceList = []
+    suitMatch = False
+    numbersMatch: False
+    match = False
+
+    #first go through cards and add suits to 1 list and numbers to another
+    for card in cardsToCheck:
+        #check suits
+        suitList.append(card[-1])
+        if len(card) == 3:
+            numberList.append(10)
+            faceList.append(10)
+        elif (card[0] in {'K', 'Q', 'J'}):
+            faceList.append(card[0])
+            numberList.append(10)
+        elif card[0] == 'A':
+            faceList.append(card[0])
+            numberList.append(1)
+        else:
+            numberList.append(int(card[0]))
+    print('suit list is',suitList)
+    print('number list is', numberList)
+    #now lets check match status
+    if (suitList[0] == suitList[1] and suitList[0] == suitList[2]):
+        print('The Suits Match! Lets check to see if your numbers are consecutive')
+        suitMatch = True 
+        if (abs(numberList[0] - numberList[1]) <= 2 or abs(numberList[0] - numberList[1]) <= 2) :
+            print('The Numbers are consecutive. Looks like you have a pair')
+            match = True
+    
+    # Since we changed the value of Face cards  to equal 10
+    # We need to uses the 'cardsToCheck' list from above 
+    # to see if numbers match
+    elif (faceList[0] == faceList[1] and faceList[0] == faceList[2]):
+        print('The Numbers Match! Lets see if you have different suits!')
+        if(suitList[0] != suitList[1] and suitList[0] != suitList[2]):
+            print('The Suits are Different! Looks like you have a pair')
+            match = True
+
+    return [match, cardsToCheck]
 
 # this will be the code for each round.
 def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile, cardsLeft):
@@ -134,6 +181,17 @@ def playerTurn(gameOver, round, deck, player1Hand, player2Hand, discard_pile, ca
             countTotal(player1Hand, player2Hand)
         elif playerMoveUpper == 'DROP':
             gameOver = drop(player1Hand, player2Hand)
+        elif playerMoveUpper == 'PAIR':
+            pairData = pair(hand)
+            pairMatchBool = pairData[0]
+            pairCards = pairData[1]
+            if pairMatchBool == True:
+                print('You have a pair. lets remove those cards')
+                for card in pairCards:
+                    hand.remove(card)
+                print(f'Your new hand is {hand}')
+            else:
+                print('Those cards were not a match. Continue with your turn.')
 
 
 
