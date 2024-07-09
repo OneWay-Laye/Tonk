@@ -3,7 +3,7 @@ from random import randint
 
 #Random card In deck fuction
 def randomCardFunc(deck, hand, cardsLeft):
-    randomCardPosition = randint(0, cardsLeft)
+    randomCardPosition = randint(0, cardsLeft -1)
     randomCard = deck[randomCardPosition]
     hand.append(randomCard)
     deck.remove(randomCard)
